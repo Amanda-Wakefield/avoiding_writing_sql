@@ -6,19 +6,19 @@
 </head>
 <body>
 <h1>Hello!</h1>
-<p>Please create a superuser to log in to the <a href="/admin/">admin site </a>where you can see a gui
+
+{% if user.is_authenticated %}
+You are logged in. Please go to the <a href="/admin/">admin page</a> to access your models.
+
+{% else %}
+
+<p>Please create a superuser to log in to the <a href="/admin/">admin site </a>where you can see a GUI
     for your database tables.</p><br>
 
 <p>You can create an admin user by running the command: <br>
     <i>&emsp; python manage.py createsuperuser</i><p><br>
-
-<p>Any time you want to have your changes to a model reflected in the database, you will need to run migrations with: <br>
-    <i>&emsp; python manage.py makemigrations</i><br>
-    <i>&emsp; python manage.py migrate</i><br>
-<p>
-
-
 </p>
+<!--{% endif %}-->
 
 </body>
 </html>

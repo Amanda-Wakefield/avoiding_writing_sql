@@ -5,7 +5,6 @@ from django.db.models import (
     SET_NULL,
     CharField,
     DateField,
-    FileField,
     FloatField,
     ForeignKey,
     IntegerField,
@@ -45,29 +44,15 @@ class Structure(Model):
     resolution = FloatField(null=True, blank=True)
     deposition_date = DateField()
     # From PDB
-    pdb_file = FileField(upload_to="gpcrs/raw_pdbs/", null=True, blank=True)
     publication = CharField(max_length=250, null=True, blank=True)
     protein = ForeignKey(
         Protein, related_name="gpcrs", on_delete=CASCADE, null=True, blank=True
     )
     chain = CharField(max_length=1)  # chain used for mapping
 
-    # raw pdb file -- whole structure
-    raw_pdb_file = FileField(upload_to="gpcrs/raw_pdbs/", null=True, blank=True)
-
-    # Domain split pdb file
-    domain_pdb_file = FileField(
-        upload_to="gpcrs/domain_split_pdbs/", null=True, blank=True
-    )
-
-    mapped_pdb_file = FileField(
-        upload_to="gpcrs/mapped_pdbs/", null=True, blank=True
-    )  # The mapping results file w/ domain splitting
-
 
 class AlloStructure(Model):
     ligand_id = CharField(max_length=3)
-    pdb_file = FileField(upload_to="gpcrs/allo_pdbs/")
     structure = ForeignKey(Structure, on_delete=SET_NULL, null=True)
 
 

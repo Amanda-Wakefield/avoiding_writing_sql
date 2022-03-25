@@ -4,13 +4,15 @@ from django.contrib import admin
 
 from .models import AlloStructure, Protein, Similarities, Structure
 
-# an InLine allows you to view objects with foreign keys
+
 class StructureInline(admin.TabularInline):
     model = Structure
+    list_display = ('pdb_id', 'deposition_date')
 
 
 class ProteinAdmin(admin.ModelAdmin):
-    inlines = (StructureInline)
+    # an InLine allows you to view objects with foreign keys
+    inlines = (StructureInline,)
 
 
 class StructureAdmin(admin.ModelAdmin):
